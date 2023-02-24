@@ -1,0 +1,233 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="card" style="width: 60rem; margin-left: 10rem;">
+    <div class="container" style="height: 8rem; margin-top: 2rem;">
+        <div class="row">
+            <div class="col-lg-9">
+                <h1>{{offres.title}}</h1>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="checkUser()">Postuler
+                    Maintenant</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 60rem; margin-left: 10rem; margin-top: 1rem;">
+    <div class="container" style="padding-top: 10px;">
+        <div class="row">
+            <div class="col">
+                <h2>Postes Vacants</h2>
+                <p><strong>{{offres.postes_vacants}}</strong></p>
+            </div>
+            <div class="col">
+                <h2>Type d'emploi</h2>
+                <p><strong>{{offres.type_demploi_desire}}</strong></p>
+            </div>
+            <div class="col">
+                <h2>Experience</h2>
+                <p><strong>{{offres.experience}}</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Niveau d'étude</h2>
+                <p><strong>{{offres.niveau_detude}}</strong></p>
+            </div>
+            <div class="col">
+                <h2>Langue</h2>
+                <p><strong>{{offres.langue}}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 60rem; margin-left: 10rem; margin-top: 1rem;">
+    <div class="container" style="padding-top: 10px;">
+        <div class="row">
+            <div class="col">
+                <h2>Description d'emploi</h2>
+                <p><strong>{{offres.description_emploi}}</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Exigences d'emploi</h2>
+                <p><strong>{{offres.exigences_emploi}}</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Date d'expiration</h2>
+                <p><strong>{{offres.date_expiration | date}}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="openmodale">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Postuler à cette Offre</h2>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="candidatForm">
+                    <div class="mb-3">
+                        <label for="exampleInputName" class="form-label">Name</label>
+                        <input type="name" formControlName="name" class="form-control" id="exampleInputName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Email address</label>
+                        <input type="email" formControlName="email" class="form-control" id="exampleInputEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="position" class="col-form-label">Position</label>
+                        <select class="form-select" formControlName="position" aria-label="Default select example" id="position">
+                            <option selected>Select Position</option>
+                            <option value="Full Stack Developper">Full Stack Developper</option>
+                            <option value="Front-End Developper">Front-End Developper</option>
+                            <option value="Back-End Developper">Back-End Developper</option>
+                            <option value="MERN Developper">MERN Developper</option>
+                            <option value="MEAN Developper">MEAN Developper</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputMotivation" class="form-label">Lettre De Motivation</label>
+                        <textarea type="text" formControlName="lettre_motivation" class="form-control" rows="5"
+                            id="exampleInputMotivation"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputCV" class="form-label">CV</label>
+                        <input type="file" class="form-control" id="exampleInputCV" (change)="uploadFile($event)">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" (click)="addCandidat()" class="btn btn-primary">Postuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal-->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Postuler à cette Offre</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{errormsg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{successmsg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="candidatForm">
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="position" class="col-form-label">Position:</label>
+                        <select class="form-select" aria-label="Default select example" id="position">
+                            <option selected>Select Position</option>
+                            <option value="1">Full Stack Developper</option>
+                            <option value="2">Front-End Developper</option>
+                            <option value="3">Back-End Developper</option>
+                            <option value="4">MERN Developper</option>
+                            <option value="5">MEAN Developper</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Lettre De Motivation:</label>
+                        <textarea class="form-control" id="message-text" cols="5" rows="10"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cv" class="col-form-label">CV:</label>
+                        <input type="file" class="form-control" id="cv">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addCandidat()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- Modal -->
+<!-- <div class="modal fade form-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog max-width-px-840 position-relative">
+        <button type="button"
+            class="circle-32 btn-reset bg-white pos-abs-tr mt-md-n6 mr-lg-n6 focus-reset z-index-supper"
+            data-dismiss="modal"><i class="lni lni-close"></i></button>
+        <div class="login-modal-main">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="heading">
+                            <h3>Postuler à cette Offre</h3>
+                        </div>
+                        <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{errormsg}}</strong>
+                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{successmsg}}</strong>
+                            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <form [formGroup]="candidatForm">
+                            <div class="mb-3">
+                                <label>Name:</label>
+                                <input type="text" class="form-control" name="name" formControlName="name">
+                            </div>
+                            <div class="mb-3">
+                                <label>Email:</label>
+                                <input type="email" class="form-control" name="email" formControlName="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="position" class="col-form-label">Position:</label>
+                                <select class="form-select" aria-label="Default select example" id="position">
+                                    <option selected>Select Position</option>
+                                    <option value="Full Stack Developper">Full Stack Developper</option>
+                                    <option value="Front-End Developper">Front-End Developper</option>
+                                    <option value="Back-End Developper">Back-End Developper</option>
+                                    <option value="MERN Developper">MERN Developper</option>
+                                    <option value="MEAN Developper">MEAN Developper</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label>Lettre De Motivation:</label>
+                                <textarea class="form-control" name="lettre_motivation" formControlName="lettre_motivation" cols="5" rows="10"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label>CV:</label>
+                                <input type="file" class="form-control" name="cv" formControlName="cv">
+                            </div>
+                        </form>
+                        <div class="form-group mb-8 button">
+                            <button class="btn" (click)="addCandidat()">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

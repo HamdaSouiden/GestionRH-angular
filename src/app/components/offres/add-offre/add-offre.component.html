@@ -1,0 +1,74 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="col-md-6">
+  <h2 class="title" *ngIf="!getbyid">Add Offres :</h2>
+  <h2 class="title" *ngIf="getbyid">Update Offres :</h2>
+  <div *ngIf="errormsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{errormsg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{successmsg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <div class="demo-button-container">
+    <form [formGroup]="offreForm">
+      <div class="row">
+        <div class="col-lg-4 mt-2">
+          <label><strong>Title :</strong></label>
+          <input type="text" class="form-control" formControlName="title" placeholder="Enter title" />
+        </div>
+        <div class="col-lg-4 mt-2">
+          <label><strong>Postes Vacants :</strong></label>
+          <input type="text" class="form-control" formControlName="postes_vacants" placeholder="Enter postes vacants" />
+        </div>
+        <div class="col-lg-4 mt-2">
+          <label><strong>Type d'emploi :</strong></label>
+          <input type="text" class="form-control" formControlName="type_demploi_desire"
+            placeholder="Enter type d'emploi" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 mt-2">
+          <label><strong>Experience :</strong></label>
+          <input type="text" class="form-control" formControlName="experience" placeholder="Enter experience" />
+        </div>
+        <div class="col-lg-4 mt-2">
+          <label><strong>Niveau d'étude :</strong></label>
+          <input type="text" class="form-control" formControlName="niveau_detude" placeholder="Enter niveau d'étude" />
+        </div>
+        <div class="col-lg-4 mt-2">
+          <label><strong>Langue :</strong></label>
+          <input type="text" class="form-control" formControlName="langue" placeholder="Enter langue" />
+        </div>
+      </div>
+      <div class="col-lg-8 mt-2">
+        <label><strong>Description d'emploi :</strong></label>
+        <textarea type="text" class="form-control" formControlName="description_emploi"
+          placeholder="Enter description d'emploi"></textarea>
+      </div>
+      <div class="col-lg-8 mt-2">
+        <label><strong>Exigences d'emploi :</strong></label>
+        <textarea type="text" class="form-control" formControlName="exigences_emploi"
+          placeholder="Enter exigences d'emploi"></textarea>
+      </div>
+      <div class="col-lg-6 mt-2">
+        <label><strong>Date d'expiration :</strong></label>
+        <input type="date" class="form-control" formControlName="date_expiration"
+          placeholder="Enter date d'expiration" />
+      </div>
+      <div class="col-lg-4 mt-2">
+        <button class="btn btn-info" *ngIf="!getbyid" (click)="addOffre()">Add</button>
+      </div>
+      <div class="col-lg-4 mt-2">
+        <button class="btn btn-dark" *ngIf="getbyid" (click)="updateOffre()">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

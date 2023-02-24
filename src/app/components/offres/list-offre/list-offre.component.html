@@ -1,0 +1,226 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="offre-container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="title"><span [matBadge]="Data.length" matBadgeOverlap="false">Offres Details</span></h2>
+    </div>
+    <div class="col">
+      <button class="btn btn1 btn-dark" (click)="clickAddOffre()" type="button" data-toggle="modal"
+        data-target="#exampleModal">Add Offre</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+
+      <!-- Postes Vacants Column -->
+      <ng-container matColumnDef="postes_vacants">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Postes Vacants </th>
+        <td mat-cell *matCellDef="let row"> {{row.postes_vacants}} </td>
+      </ng-container>
+
+      <!-- Type d'emploi Column -->
+      <ng-container matColumnDef="type_demploi_desire">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type d'emploi </th>
+        <td mat-cell *matCellDef="let row"> {{row.type_demploi_desire}} </td>
+      </ng-container>
+
+      <!-- Experience Column -->
+      <ng-container matColumnDef="experience">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
+        <td mat-cell *matCellDef="let row"> {{row.experience}} </td>
+      </ng-container>
+
+      <!-- Niveau d'étude Column -->
+      <ng-container matColumnDef="niveau_detude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau d'étude </th>
+        <td mat-cell *matCellDef="let row"> {{row.niveau_detude}} </td>
+      </ng-container>
+
+      <!-- Langue Column -->
+      <ng-container matColumnDef="langue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Langue </th>
+        <td mat-cell *matCellDef="let row"> {{row.langue}} </td>
+      </ng-container>
+
+      <!-- Description d'emploi Column -->
+      <ng-container matColumnDef="description_emploi">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description d'emploi </th>
+        <td mat-cell *matCellDef="let row"> {{row.description_emploi}} </td>
+      </ng-container>
+
+      <!-- Exigences d'emploi Column -->
+      <ng-container matColumnDef="exigences_emploi">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Exigences d'emploi </th>
+        <td mat-cell *matCellDef="let row"> {{row.exigences_emploi}} </td>
+      </ng-container>
+
+      <!-- Date d'expiration Column -->
+      <ng-container matColumnDef="date_expiration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date d'expiration </th>
+        <td mat-cell *matCellDef="let row"> {{row.date_expiration | date}} </td>
+      </ng-container>
+
+      <!-- Deparetment Column -->
+      <ng-container matColumnDef="Deparetment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Deparetment </th>
+        <td mat-cell *matCellDef="let row"> {{row.Deparetment.name}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" data-toggle="modal" data-target="#exampleModal" (click)="onEdit(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteOffre(row.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>
+<!-- <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Postes Vacants</th>
+            <th scope="col">Type d'emploi</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Niveau d'étude</th>
+            <th scope="col">Langue</th>
+            <th scope="col" >Description d'emploi</th>
+            <th scope="col" >Exigences d'emploi</th>
+            <th scope="col">Date d'expiration</th>
+            <th scope="col">createdAt</th>
+            <th scope="col">updatedAt</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let offre of Data">
+            <td>{{offre.id}}</td>
+            <td>{{ offre.title}}</td>
+            <td>{{ offre.postes_vacants}}</td>
+            <td>{{ offre.type_demploi_desire}}</td>
+            <td>{{ offre.experience}}</td>
+            <td>{{ offre.niveau_detude}}</td>
+            <td>{{ offre.langue}}</td>
+            <td>{{ offre.description_emploi}}</td>
+            <td>{{ offre.exigences_emploi}}</td>
+            <td>{{ offre.date_expiration | date}}</td>
+            <td>{{ offre.createdAt | date}}</td>
+            <td>{{ offre.updatedAt | date}}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" style="margin-bottom: 10px; padding-right: 12px;" (click)="deleteOffre(offre.id)">Delete</button>
+                <button type="button" data-toggle="modal" data-target="#exampleModal" (click)="onEdit(offre)" class="btn btn-sm btn-success">Update</button>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" *ngIf="showAdd" id="exampleModalLabel">Add Offre</h2>
+        <h2 class="modal-title" *ngIf="showUpdate" id="exampleModalLabel">Update Offre</h2>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formOffre">
+          <div class="mb-3">
+            <label for="exampleInputTitle" class="form-label">Title :</label>
+            <input type="text" formControlName="title" class="form-control" id="exampleInputTitle">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPostes" class="form-label">Postes Vacants :</label>
+            <input type="text" formControlName="postes_vacants" class="form-control" id="exampleInputPostes">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputType" class="form-label">Type d'emploi :</label>
+            <input type="text" formControlName="type_demploi_desire" class="form-control" id="exampleInputType">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputExperience" class="form-label">Experience :</label>
+            <input type="text" formControlName="experience" class="form-control" id="exampleInputExperience">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputNiveau" class="form-label">Niveau d'étude :</label>
+            <input type="text" formControlName="niveau_detude" class="form-control" id="exampleInputNiveau">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputLangue" class="form-label">Langue :</label>
+            <input type="text" formControlName="langue" class="form-control" id="exampleInputLangue">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputLangue" class="form-label">select :</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" formControlName="idD">
+              <option selected>Open this select menu</option>
+              <option *ngFor="let d of depart" [value]="d.id">{{d.name}}</option>
+              <!-- <option value="Development Mobile">Development Mobile</option>
+                          <option value="Internet of Thing">Internet of Thing</option> -->
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputDescription" class="form-label">Description d'emploi :</label>
+            <textarea matInput type="text" formControlName="description_emploi" class="form-control" rows="8"
+              id="exampleInputDescription"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputExigences" class="form-label">Exigences d'emploi :</label>
+            <textarea matInput type="text" formControlName="exigences_emploi" class="form-control" rows="8"
+              id="exampleInputExigences"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputDate" class="form-label">Date d'expiration :</label>
+            <input type="date" formControlName="date_expiration" class="form-control" id="exampleInputDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" *ngIf="showAdd" (click)="addOffre()" class="btn btn-info">Add</button>
+        <button type="button" *ngIf="showUpdate" (click)="updateOffre()" class="btn btn-info">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

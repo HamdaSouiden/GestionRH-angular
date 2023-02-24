@@ -1,0 +1,21 @@
+.container{
+    margin-left: 25%;
+    margin-top: 50px;
+}
+
+.btn{
+    margin-left:90%;
+}
+
+.item {
+    margin: 0px;
+    text-align: center;
+}
+
+.item h3:hover {
+    color: blue;
+}
+
+.card {
+    padding: 10px;
+}

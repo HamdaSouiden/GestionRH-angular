@@ -1,0 +1,31 @@
+.departement-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  margin-left: 200px;
+}
+
+/* .table{
+  margin-left: 10px;
+} */
+
+.btn1 {
+  margin-bottom: 20px;
+  margin-left: 53%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+

@@ -1,0 +1,47 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-2">
+        <div class="d-flex card" style="margin-top: 10%; margin-left: 10px;">
+            <h2 class="card-title text-center mt-2">Filtrage</h2>
+            <div class="card-body">
+                <div class="item">
+                    <button (click)="filter('all')">
+                        <h3>All Offres</h3>
+                    </button>
+                </div>
+                <div class="item" *ngFor="let c of departements ">
+                    <button (click)="filter(c.id)">
+                        <h3>{{c.name}}</h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div>
+            <!-- <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+              </mat-form-field> -->
+            <div class="card w-75 mt-4" *ngFor="let offre of Data">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="card-title">{{offre.title}}</h2>
+                            <p>{{offre.createdAt | date}}</p>
+                        </div>
+                        <div class="col-md-7">
+                            <a [routerLink]="['/offre-item', offre.id]" class="btn btn-dark"
+                                style="padding-top: 12px;">Voir Plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

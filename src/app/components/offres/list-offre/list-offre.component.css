@@ -1,0 +1,22 @@
+.offre-container {
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    width: 100%;
+}
+
+.title{
+    margin-left: 200px;
+  }
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn1 {
+    margin-bottom: 20px;
+    margin-left: 60%;
+}
